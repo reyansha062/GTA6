@@ -4,44 +4,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SECURITY BREACH</title>
+<title>System Security</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    font-family:"Courier New",monospace;
 }
 
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-    color: #00ff41;
-    font-family: "Courier New", monospace;
+body{
+    color:#00ff41;
 }
 
-body {
+/* DEVICE SCREEN */
+
+#deviceScreen{
+    position:fixed;
+    inset:0;
+    z-index:999;
     background:
-        radial-gradient(circle at center, #061006 0%, #000 65%);
+        radial-gradient(circle,#061006 0%,#000 70%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
 }
 
-/* MATRIX BACKGROUND */
-
-#matrix {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    opacity: .42;
+.deviceBox{
+    width:min(650px,94%);
+    border:1px solid #00ff41;
+    padding:40px 25px;
+    background:rgba(0,10,2,.95);
+    box-shadow:0 0 35px #00ff4133;
 }
 
-/* DARK OVERLAY */
+.deviceTitle{
+    color:#00ff41;
+    font-size:clamp(25px,5vw,50px);
+    text-shadow:0 0 15px #00ff41;
+    margin-bottom:15px;
+}
 
-.overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
+.deviceText{
+    color:#aaa;
+    margin-bottom:30px;
+}
+
+.deviceButtons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.deviceButton{
+    width:210px;
+    padding:18px;
+    background:#020802;
+    color:#00ff41;
+    border:1px solid #00ff41;
+    font-family:inherit;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.deviceButton:hover{
+    background:#00ff41;
+    color:#000;
+}
+
+/* ROTATE SCREEN */
+
+#rotateScreen{
+    position:fixed;
+    inset:0;
+    z-index:998;
+    display:none;
+    background:#000;
+    color:#00ff41;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:25px;
+}
+
+.rotateIcon{
+    font-size:90px;
+    animation:rotateIcon 2s infinite;
+    margin-bottom:25px;
+}
+
+.rotateTitle{
+    font-size:clamp(25px,6vw,55px);
+    text-shadow:0 0 20px #00ff41;
+}
+
+.rotateText{
+    color:#aaa;
+    max-width:550px;
+    line-height:1.7;
+}
+
+@keyframes rotateIcon{
+    0%{transform:rotate(0)}
+    45%{transform:rotate(90deg)}
+    100%{transform:rotate(90deg)}
+}
+
+/* MATRIX */
+
+#matrix{
+    position:fixed;
+    inset:0;
+    z-index:0;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
     background:
         repeating-linear-gradient(
             0deg,
@@ -54,313 +144,264 @@ body {
 
 /* MAIN */
 
-#app {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
+#app{
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    padding:22px;
 }
 
-/* TOP WARNING */
-
-.header {
-    text-align: center;
-    color: #ff2020;
-    font-weight: bold;
-    font-size: clamp(30px, 5vw, 70px);
+.header{
+    text-align:center;
+    color:#ff2020;
+    font-weight:bold;
+    font-size:clamp(28px,5vw,65px);
     text-shadow:
         0 0 10px red,
-        0 0 25px red;
-    animation: warning 0.65s infinite;
+        0 0 30px red;
+    animation:warning .65s infinite;
 }
 
-.subheader {
-    text-align: center;
-    color: #fff;
-    letter-spacing: 5px;
-    margin-top: 5px;
+.subheader{
+    text-align:center;
+    color:#fff;
+    letter-spacing:4px;
+    margin-top:5px;
 }
 
 /* CONTENT */
 
-.content {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
-    gap: 20px;
-    height: calc(100% - 130px);
-    margin-top: 20px;
+.content{
+    display:grid;
+    grid-template-columns:1fr 1.4fr 1fr;
+    gap:18px;
+    height:calc(100% - 115px);
+    margin-top:18px;
 }
 
-/* PANELS */
-
-.panel {
-    background: rgba(0, 10, 2, .82);
-    border: 1px solid #00ff41;
+.panel{
+    background:rgba(0,10,2,.86);
+    border:1px solid #00ff41;
     box-shadow:
-        0 0 20px rgba(0,255,65,.18),
-        inset 0 0 30px rgba(0,255,65,.05);
-    padding: 18px;
-    overflow: hidden;
+        0 0 20px #00ff4120,
+        inset 0 0 30px #00ff4108;
+    padding:17px;
+    overflow:hidden;
 }
 
-.panelTitle {
-    color: #00ff41;
-    border-bottom: 1px solid #00ff41;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    font-weight: bold;
+.panelTitle{
+    color:#00ff41;
+    border-bottom:1px solid #00ff41;
+    padding-bottom:10px;
+    margin-bottom:15px;
+    font-weight:bold;
 }
 
-/* FAKE INFORMATION */
-
-.info {
-    margin-bottom: 14px;
-    font-size: 14px;
+.info{
+    margin-bottom:12px;
+    font-size:13px;
 }
 
-.label {
-    color: #888;
-}
-
-.value {
-    color: #00ff41;
-}
-
-.danger {
-    color: #ff2020;
-}
+.label{color:#777}
+.value{color:#00ff41}
+.red{color:#ff2020}
+.yellow{color:#ffe600}
 
 /* HACKER */
 
-.hackerPanel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.hackerPanel{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
-.hacker {
-    position: relative;
-    width: 270px;
-    height: 350px;
+.hacker{
+    position:relative;
+    width:270px;
+    height:350px;
 }
 
-/* HEAD */
-
-.head {
-    position: absolute;
-    width: 92px;
-    height: 105px;
-    border-radius: 50%;
-    background: #080808;
-    left: 89px;
-    top: 20px;
-    border: 2px solid #111;
-    box-shadow: 0 0 30px #00ff4133;
+.hood{
+    position:absolute;
+    width:145px;
+    height:170px;
+    border-radius:70% 70% 30% 30%;
+    background:#050505;
+    left:62px;
+    top:0;
+    border:2px solid #111;
 }
 
-/* HOOD */
-
-.hood {
-    position: absolute;
-    width: 145px;
-    height: 170px;
-    border-radius: 70% 70% 30% 30%;
-    background: #050505;
-    left: 62px;
-    top: 0;
-    border: 2px solid #111;
+.head{
+    position:absolute;
+    width:92px;
+    height:105px;
+    border-radius:50%;
+    background:#080808;
+    left:89px;
+    top:20px;
 }
 
-/* FACE */
-
-.face {
-    position: absolute;
-    width: 70px;
-    height: 42px;
-    left: 100px;
-    top: 58px;
-    background: #020202;
-    z-index: 3;
+.face{
+    position:absolute;
+    width:70px;
+    height:42px;
+    left:100px;
+    top:58px;
+    background:#020202;
+    z-index:3;
 }
 
-.eye {
-    position: absolute;
-    width: 17px;
-    height: 3px;
-    background: #00ff41;
-    box-shadow: 0 0 12px #00ff41;
-    top: 15px;
+.eye{
+    position:absolute;
+    width:17px;
+    height:3px;
+    background:#00ff41;
+    box-shadow:0 0 12px #00ff41;
+    top:15px;
 }
 
-.eye.left {
-    left: 8px;
+.eye.left{left:8px}
+.eye.right{right:8px}
+
+.body{
+    position:absolute;
+    width:210px;
+    height:180px;
+    left:30px;
+    top:145px;
+    background:#050505;
+    border-radius:90px 90px 20px 20px;
 }
 
-.eye.right {
-    right: 8px;
+.laptop{
+    position:absolute;
+    width:170px;
+    height:105px;
+    left:50px;
+    top:170px;
+    background:#020602;
+    border:3px solid #00ff41;
+    box-shadow:0 0 25px #00ff4144;
 }
 
-/* BODY */
-
-.body {
-    position: absolute;
-    width: 210px;
-    height: 180px;
-    left: 30px;
-    top: 145px;
-    background: #050505;
-    border-radius: 90px 90px 20px 20px;
-    border: 2px solid #111;
+.laptop:after{
+    content:"";
+    position:absolute;
+    width:205px;
+    height:10px;
+    left:-20px;
+    bottom:-14px;
+    background:#111;
+    border:1px solid #00ff41;
 }
 
-/* LAPTOP */
-
-.laptop {
-    position: absolute;
-    width: 170px;
-    height: 105px;
-    left: 50px;
-    top: 170px;
-    background: #020602;
-    border: 3px solid #00ff41;
-    box-shadow: 0 0 25px #00ff4144;
-    transform: perspective(300px) rotateX(5deg);
-}
-
-.laptop::after {
-    content: "";
-    position: absolute;
-    width: 205px;
-    height: 10px;
-    left: -20px;
-    bottom: -14px;
-    background: #111;
-    border: 1px solid #00ff41;
-}
-
-.codeScreen {
-    padding: 8px;
-    font-size: 8px;
-    line-height: 1.3;
-    color: #00ff41;
-    overflow: hidden;
+.codeScreen{
+    padding:8px;
+    font-size:8px;
+    line-height:1.3;
+    color:#00ff41;
 }
 
 /* TERMINAL */
 
-.terminal {
-    height: 100%;
-    overflow: hidden;
-    font-size: 13px;
-    line-height: 1.55;
+.terminal{
+    height:100%;
+    overflow:hidden;
+    font-size:12px;
+    line-height:1.55;
 }
 
-.line {
-    white-space: nowrap;
+.line{
+    white-space:nowrap;
 }
 
-.green {
-    color: #00ff41;
-}
-
-.white {
-    color: #ddd;
-}
-
-.red {
-    color: #ff2020;
-}
-
-.yellow {
-    color: #ffe600;
-}
+.green{color:#00ff41}
+.white{color:#ddd}
 
 /* PROGRESS */
 
-.progressBox {
-    width: 100%;
-    height: 20px;
-    border: 1px solid #00ff41;
-    padding: 2px;
-    margin-top: 15px;
+.progressBox{
+    width:100%;
+    height:20px;
+    border:1px solid #00ff41;
+    padding:2px;
+    margin-top:15px;
 }
 
-.progress {
-    height: 100%;
-    width: 0%;
-    background: #00ff41;
-    box-shadow: 0 0 15px #00ff41;
+.progress{
+    height:100%;
+    width:0;
+    background:#00ff41;
+    box-shadow:0 0 15px #00ff41;
 }
 
-/* STATUS */
-
-.status {
-    margin-top: 15px;
-    text-align: center;
-    color: #ff2020;
-    font-weight: bold;
+.status{
+    margin-top:12px;
+    text-align:center;
+    color:#ff2020;
+    font-weight:bold;
 }
 
-/* FINAL SCREEN */
+/* FINAL */
 
-#final {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: #000;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+#final{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:#000;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
 }
 
-.finalTitle {
-    color: #00ff41;
-    font-size: clamp(40px, 8vw, 100px);
-    text-shadow: 0 0 30px #00ff41;
+.finalTitle{
+    color:#00ff41;
+    font-size:clamp(40px,8vw,100px);
+    text-shadow:0 0 30px #00ff41;
 }
 
-.finalText {
-    color: white;
-    font-size: 20px;
-    line-height: 1.8;
+.finalText{
+    color:#fff;
+    font-size:20px;
+    line-height:1.8;
 }
 
-/* GLITCH */
-
-.glitch {
-    animation: glitch .08s infinite;
+.glitch{
+    animation:glitch .08s infinite;
 }
 
-@keyframes warning {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .25; }
+@keyframes warning{
+    0%,100%{opacity:1}
+    50%{opacity:.25}
 }
 
-@keyframes glitch {
-    0% { transform: translate(0); }
-    25% { transform: translate(-6px, 2px); }
-    50% { transform: translate(5px, -3px); }
-    75% { transform: translate(-3px, -2px); }
-    100% { transform: translate(0); }
+@keyframes glitch{
+    0%{transform:translate(0)}
+    25%{transform:translate(-6px,2px)}
+    50%{transform:translate(5px,-3px)}
+    75%{transform:translate(-3px,-2px)}
+    100%{transform:translate(0)}
 }
 
-/* RESPONSIVE */
+/* PHONE */
 
-@media(max-width: 850px) {
-    .content {
-        grid-template-columns: 1fr;
+@media(max-width:850px){
+    .content{
+        grid-template-columns:1fr;
     }
 
-    .hackerPanel {
-        display: none;
+    .hackerPanel{
+        display:none;
     }
 
-    .content {
-        height: calc(100% - 110px);
+    .content{
+        height:calc(100% - 105px);
     }
 }
 </style>
@@ -368,9 +409,65 @@ body {
 
 <body>
 
+<!-- DEVICE SELECTION -->
+
+<div id="deviceScreen">
+
+    <div class="deviceBox">
+
+        <div class="deviceTitle">
+            DEVICE INITIALIZATION
+        </div>
+
+        <div class="deviceText">
+            Select the device type to continue system initialization.
+        </div>
+
+        <div class="deviceButtons">
+
+            <button class="deviceButton" onclick="selectLaptop()">
+                LAPTOP / DESKTOP
+            </button>
+
+            <button class="deviceButton" onclick="selectPhone()">
+                MOBILE PHONE
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PHONE ROTATION -->
+
+<div id="rotateScreen">
+
+    <div class="rotateIcon">
+        ↻
+    </div>
+
+    <div class="rotateTitle">
+        ROTATE DEVICE
+    </div>
+
+    <div class="rotateText">
+        For security interface initialization,
+        rotate your phone horizontally.
+        <br><br>
+        The system will continue automatically.
+    </div>
+
+</div>
+
+
 <canvas id="matrix"></canvas>
 
 <div class="overlay"></div>
+
+
+<!-- MAIN -->
 
 <div id="app">
 
@@ -384,7 +481,7 @@ body {
 
     <div class="content">
 
-        <!-- LEFT INFORMATION -->
+        <!-- INFO -->
 
         <div class="panel">
 
@@ -394,45 +491,51 @@ body {
 
             <div class="info">
                 <span class="label">STATUS:</span><br>
-                <span class="danger">COMPROMISED</span>
+                <span class="red">COMPROMISED</span>
             </div>
 
             <div class="info">
-                <span class="label">SECURITY:</span><br>
-                <span class="danger">BYPASSED</span>
+                <span class="label">ACCESS:</span><br>
+                <span class="red">UNAUTHORIZED</span>
             </div>
 
             <div class="info">
-                <span class="label">ACCESS LEVEL:</span><br>
+                <span class="label">PRIVILEGE:</span><br>
                 <span class="value">ADMINISTRATOR</span>
             </div>
 
             <div class="info">
-                <span class="label">ENCRYPTION:</span><br>
-                <span class="danger">DISABLED</span>
+                <span class="label">FIREWALL:</span><br>
+                <span class="red">OVERRIDDEN</span>
             </div>
 
             <div class="info">
-                <span class="label">FIREWALL:</span><br>
-                <span class="danger">OVERRIDDEN</span>
+                <span class="label">ENCRYPTION:</span><br>
+                <span class="red">BYPASSED</span>
             </div>
 
             <div class="info">
                 <span class="label">SESSION:</span><br>
-                <span class="value">REMOTE-SESSION-7421</span>
+                <span class="value">REMOTE-7421-X</span>
             </div>
 
             <div class="info">
-                <span class="label">THREAT LEVEL:</span><br>
-                <span class="danger">CRITICAL</span>
+                <span class="label">THREAT:</span><br>
+                <span class="red">CRITICAL</span>
             </div>
 
             <div class="info">
-                <span class="label">SYSTEM ID:</span><br>
-                <span class="value">NODE-X7F4-91</span>
+                <span class="label">OPERATOR:</span><br>
+                <span class="value">Keanu Revees</span>
+            </div>
+
+            <div class="info">
+                <span class="label">STATUS:</span><br>
+                <span class="red">REMOTE CONNECTION ACTIVE</span>
             </div>
 
         </div>
+
 
         <!-- HACKER -->
 
@@ -460,11 +563,18 @@ body {
 
             </div>
 
-            <div class="danger">
+            <div class="red">
+                Keanu Revees
+            </div>
+
+            <br>
+
+            <div class="red">
                 REMOTE CONNECTION ACTIVE
             </div>
 
         </div>
+
 
         <!-- TERMINAL -->
 
@@ -481,7 +591,7 @@ body {
             </div>
 
             <div class="status" id="status">
-                SCANNING SYSTEM...
+                INITIALIZING...
             </div>
 
         </div>
@@ -489,6 +599,7 @@ body {
     </div>
 
 </div>
+
 
 <!-- FINAL -->
 
@@ -503,136 +614,279 @@ body {
         No files were accessed.<br>
         No passwords were collected.<br>
         No personal information was sent anywhere.<br><br>
-        This was a harmless visual prank.
+        This was only a harmless visual prank.
     </div>
 
 </div>
 
+
 <script>
 
-/* MATRIX RAIN */
+/* DEVICE FLOW */
 
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+const deviceScreen =
+    document.getElementById("deviceScreen");
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+const rotateScreen =
+    document.getElementById("rotateScreen");
+
+function startPrank(){
+
+    deviceScreen.style.display = "none";
+    rotateScreen.style.display = "none";
+
+    initializeMatrix();
+    startTerminal();
 }
 
-resizeCanvas();
+function selectLaptop(){
+    startPrank();
+}
 
-window.addEventListener("resize", resizeCanvas);
+function selectPhone(){
 
-const chars =
-"01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&<>[]{}アイウエオカキクケコ";
+    deviceScreen.style.display = "none";
+    rotateScreen.style.display = "flex";
 
-const fontSize = 15;
-let columns = Math.floor(window.innerWidth / fontSize);
-let drops = Array(columns).fill(1);
+    checkOrientation();
+}
 
-function matrixRain() {
+function checkOrientation(){
 
-    ctx.fillStyle = "rgba(0,0,0,0.055)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#00ff41";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < drops.length; i++) {
-
-        const text =
-            chars[Math.floor(Math.random() * chars.length)];
-
-        ctx.fillText(
-            text,
-            i * fontSize,
-            drops[i] * fontSize
-        );
-
-        if (
-            drops[i] * fontSize > canvas.height &&
-            Math.random() > .975
-        ) {
-            drops[i] = 0;
-        }
-
-        drops[i]++;
+    if(
+        window.innerWidth >
+        window.innerHeight
+    ){
+        startPrank();
+        return;
     }
 
-    requestAnimationFrame(matrixRain);
+    setTimeout(checkOrientation,500);
 }
 
-matrixRain();
+window.addEventListener(
+    "resize",
+    checkOrientation
+);
+
+
+/* MATRIX */
+
+const canvas =
+    document.getElementById("matrix");
+
+const ctx =
+    canvas.getContext("2d");
+
+let drops = [];
+
+function initializeMatrix(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+    const fontSize = 15;
+
+    const columns =
+        Math.floor(
+            canvas.width / fontSize
+        );
+
+    drops =
+        Array(columns).fill(1);
+
+    function draw(){
+
+        ctx.fillStyle =
+            "rgba(0,0,0,.055)";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.fillStyle =
+            "#00ff41";
+
+        ctx.font =
+            fontSize + "px monospace";
+
+        const chars =
+            "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&<>[]{}";
+
+        for(
+            let i=0;
+            i<drops.length;
+            i++
+        ){
+
+            const text =
+                chars[
+                    Math.floor(
+                        Math.random() *
+                        chars.length
+                    )
+                ];
+
+            ctx.fillText(
+                text,
+                i * fontSize,
+                drops[i] * fontSize
+            );
+
+            if(
+                drops[i] * fontSize >
+                canvas.height &&
+                Math.random() > .975
+            ){
+                drops[i] = 0;
+            }
+
+            drops[i]++;
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+}
+
 
 /* TERMINAL */
 
-const terminal = document.getElementById("terminal");
-const progress = document.getElementById("progress");
-const status = document.getElementById("status");
-const header = document.getElementById("header");
-const app = document.getElementById("app");
-const finalScreen = document.getElementById("final");
+const terminal =
+    document.getElementById("terminal");
+
+const progress =
+    document.getElementById("progress");
+
+const status =
+    document.getElementById("status");
+
+const header =
+    document.getElementById("header");
+
+const app =
+    document.getElementById("app");
+
+const finalScreen =
+    document.getElementById("final");
 
 const messages = [
-    ["Initializing remote connection...", "green"],
-    ["Searching for active system node...", "white"],
-    ["Node discovered.", "green"],
-    ["Establishing encrypted tunnel...", "green"],
-    ["Tunnel established.", "green"],
-    ["Scanning security configuration...", "white"],
-    ["Firewall configuration located.", "white"],
-    ["Attempting security bypass...", "yellow"],
-    ["Security layer bypassed.", "red"],
-    ["Access token generated.", "red"],
-    ["Remote operator connected.", "red"],
-    ["Administrator privileges detected.", "red"],
-    ["System protection disabled.", "red"],
-    ["Beginning system extraction simulation...", "yellow"],
-    ["Scanning user environment...", "white"],
-    ["Analyzing system configuration...", "white"],
-    ["Checking protected resources...", "white"],
-    ["Critical security vulnerability detected.", "red"],
-    ["Remote session remains active.", "red"],
-    ["LOCKDOWN PROTOCOL INITIATED.", "red"]
+
+    "Initializing remote connection...",
+    "Searching for active system node...",
+    "Node discovered.",
+    "Establishing encrypted tunnel...",
+    "Tunnel established.",
+    "Scanning security configuration...",
+    "Firewall configuration located.",
+    "Attempting security bypass...",
+    "Security layer bypassed.",
+    "Access token generated.",
+    "Remote operator connected.",
+    "Administrator privileges detected.",
+    "System protection disabled.",
+    "Analyzing system configuration...",
+    "Checking protected resources...",
+    "Critical security vulnerability detected.",
+    "Remote session remains active.",
+    "LOCKDOWN PROTOCOL INITIATED."
+
 ];
 
 let index = 0;
 let percent = 0;
 
-function addLine() {
+function startTerminal(){
 
-    if (index >= messages.length) {
+    setTimeout(addLine,900);
+
+}
+
+function addLine(){
+
+    if(index >= messages.length){
+
         finishSequence();
+
         return;
     }
 
-    const line = document.createElement("div");
+    const line =
+        document.createElement("div");
 
     line.className =
-        "line " + messages[index][1];
+        "line " +
+        (
+            messages[index]
+            .includes("Critical") ||
+            messages[index]
+            .includes("bypassed") ||
+            messages[index]
+            .includes("disabled") ||
+            messages[index]
+            .includes("LOCKDOWN")
+            ? "red"
+            : "green"
+        );
 
     line.textContent =
-        "> " + messages[index][0];
+        "> " + messages[index];
 
     terminal.appendChild(line);
 
-    terminal.scrollTop = terminal.scrollHeight;
+    terminal.scrollTop =
+        terminal.scrollHeight;
 
-    percent += 5;
+    percent += 6;
 
     progress.style.width =
-        Math.min(percent, 100) + "%";
+        Math.min(percent,100) + "%";
 
     index++;
 
     setTimeout(
         addLine,
-        450 + Math.random() * 650
+        450 +
+        Math.random() * 650
     );
 }
 
-function finishSequence() {
+
+/* MINI LAPTOP */
+
+const miniCode =
+    document.getElementById("miniCode");
+
+setInterval(()=>{
+
+    let output="";
+
+    for(let i=0;i<12;i++){
+
+        output +=
+            Math.random()
+            .toString(16)
+            .substring(2,14)
+            + "<br>";
+
+    }
+
+    miniCode.innerHTML =
+        output;
+
+},180);
+
+
+/* FINISH */
+
+function finishSequence(){
 
     status.textContent =
         "CRITICAL SECURITY FAILURE";
@@ -642,37 +896,16 @@ function finishSequence() {
 
     app.classList.add("glitch");
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
-        app.style.display = "none";
+        app.style.display =
+            "none";
 
-        finalScreen.style.display = "flex";
+        finalScreen.style.display =
+            "flex";
 
-    }, 4500);
+    },4500);
 }
-
-/* MINI LAPTOP CODE */
-
-const miniCode = document.getElementById("miniCode");
-
-setInterval(() => {
-
-    let output = "";
-
-    for (let i = 0; i < 12; i++) {
-
-        output +=
-            Math.random()
-            .toString(16)
-            .substring(2, 14)
-            + "<br>";
-    }
-
-    miniCode.innerHTML = output;
-
-}, 180);
-
-setTimeout(addLine, 1000);
 
 </script>
 
