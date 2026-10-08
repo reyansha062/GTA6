@@ -1,0 +1,221 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECURITY ALERT</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: #000;
+        color: #00ff41;
+        font-family: "Courier New", monospace;
+        overflow: hidden;
+    }
+
+    .screen {
+        height: 100vh;
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .warning {
+        color: #ff2020;
+        font-size: clamp(35px, 8vw, 90px);
+        font-weight: bold;
+        text-shadow: 0 0 15px red;
+        animation: blink 0.7s infinite;
+    }
+
+    .sub {
+        color: white;
+        font-size: 20px;
+        margin: 15px;
+    }
+
+    .terminal {
+        width: min(900px, 95%);
+        height: 280px;
+        background: #050505;
+        border: 1px solid #00ff41;
+        box-shadow: 0 0 25px #00ff4144;
+        padding: 20px;
+        text-align: left;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    #log {
+        line-height: 1.6;
+    }
+
+    .bar {
+        width: min(700px, 90%);
+        height: 25px;
+        border: 1px solid #00ff41;
+        margin-top: 25px;
+    }
+
+    #progress {
+        height: 100%;
+        width: 0%;
+        background: #00ff41;
+        box-shadow: 0 0 15px #00ff41;
+        transition: width 0.2s;
+    }
+
+    button {
+        margin-top: 30px;
+        padding: 15px 35px;
+        background: #111;
+        color: #00ff41;
+        border: 1px solid #00ff41;
+        font-family: inherit;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #00ff41;
+        color: #000;
+    }
+
+    .joke {
+        display: none;
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
+        margin-top: 25px;
+    }
+
+    @keyframes blink {
+        50% { opacity: 0.35; }
+    }
+
+    @keyframes shake {
+        0% { transform: translate(0); }
+        25% { transform: translate(5px, -5px); }
+        50% { transform: translate(-5px, 5px); }
+        75% { transform: translate(5px, 5px); }
+        100% { transform: translate(0); }
+    }
+
+    .shake {
+        animation: shake 0.12s infinite;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="screen" id="screen">
+
+    <div class="warning">⚠ SYSTEM COMPROMISED ⚠</div>
+
+    <div class="sub">
+        UNAUTHORIZED ACCESS DETECTED
+    </div>
+
+    <div class="terminal">
+        <div id="log"></div>
+    </div>
+
+    <div class="bar">
+        <div id="progress"></div>
+    </div>
+
+    <button id="stop">STOP ATTACK</button>
+
+    <div class="joke" id="joke">
+        😂 GOTCHA! THIS WAS A PRANK 😂
+        <br>
+        <small style="font-size:16px;font-weight:normal;">
+            Nothing was hacked. Your device is completely fine.
+        </small>
+    </div>
+
+</div>
+
+<script>
+const lines = [
+    "[+] Establishing secure connection...",
+    "[+] Connection established.",
+    "[+] Scanning device...",
+    "[+] Checking system files...",
+    "[+] Accessing encrypted database...",
+    "[!] Unauthorized session detected!",
+    "[+] Bypassing security layer...",
+    "[+] Encrypting connection...",
+    "[!] SECURITY BREACH DETECTED!",
+    "[+] Finalizing operation..."
+];
+
+const log = document.getElementById("log");
+const progress = document.getElementById("progress");
+const screen = document.getElementById("screen");
+const joke = document.getElementById("joke");
+const stop = document.getElementById("stop");
+
+let index = 0;
+let percent = 0;
+
+function addLine() {
+    if (index < lines.length) {
+        const line = document.createElement("div");
+        line.textContent = lines[index];
+        log.appendChild(line);
+
+        index++;
+        percent = Math.min(95, percent + 9);
+        progress.style.width = percent + "%";
+
+        setTimeout(addLine, 900);
+    } else {
+        setTimeout(revealPrank, 1800);
+    }
+}
+
+function revealPrank() {
+    progress.style.width = "100%";
+    screen.classList.add("shake");
+
+    setTimeout(() => {
+        screen.classList.remove("shake");
+
+        document.querySelector(".warning").textContent =
+            "😂 YOU GOT PRANKED 😂";
+
+        document.querySelector(".warning").style.color = "#00ff41";
+
+        joke.style.display = "block";
+        stop.style.display = "none";
+    }, 700);
+}
+
+stop.onclick = () => {
+    joke.style.display = "block";
+    joke.innerHTML = `
+        😂 NICE TRY! 😂<br>
+        <small style="font-size:16px;font-weight:normal;">
+        Don't worry — this was only a harmless prank.
+        </small>
+    `;
+    stop.style.display = "none";
+};
+
+setTimeout(addLine, 800);
+</script>
+
+</body>
+</html>
+```
