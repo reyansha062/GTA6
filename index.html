@@ -1,9 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="XTLG9lxikMYpd6OU7Rgeck51SUnNTI2NEt4I1RmgEq8" />
 <title>System Security</title>
 
 <style>
@@ -77,7 +77,7 @@ body{
 
 .deviceButton:hover{
     background:#00ff41;
-    color:#000;
+  000;
 }
 
 /* ROTATE SCREEN */
@@ -801,114 +801,4 @@ const messages = [
 ];
 
 let index = 0;
-let percent = 0;
-
-function startTerminal(){
-
-    setTimeout(addLine,900);
-
-}
-
-function addLine(){
-
-    if(index >= messages.length){
-
-        finishSequence();
-
-        return;
-    }
-
-    const line =
-        document.createElement("div");
-
-    line.className =
-        "line " +
-        (
-            messages[index]
-            .includes("Critical") ||
-            messages[index]
-            .includes("bypassed") ||
-            messages[index]
-            .includes("disabled") ||
-            messages[index]
-            .includes("LOCKDOWN")
-            ? "red"
-            : "green"
-        );
-
-    line.textContent =
-        "> " + messages[index];
-
-    terminal.appendChild(line);
-
-    terminal.scrollTop =
-        terminal.scrollHeight;
-
-    percent += 6;
-
-    progress.style.width =
-        Math.min(percent,100) + "%";
-
-    index++;
-
-    setTimeout(
-        addLine,
-        450 +
-        Math.random() * 650
-    );
-}
-
-
-/* MINI LAPTOP */
-
-const miniCode =
-    document.getElementById("miniCode");
-
-setInterval(()=>{
-
-    let output="";
-
-    for(let i=0;i<12;i++){
-
-        output +=
-            Math.random()
-            .toString(16)
-            .substring(2,14)
-            + "<br>";
-
-    }
-
-    miniCode.innerHTML =
-        output;
-
-},180);
-
-
-/* FINISH */
-
-function finishSequence(){
-
-    status.textContent =
-        "CRITICAL SECURITY FAILURE";
-
-    header.textContent =
-        "SYSTEM TAKEOVER";
-
-    app.classList.add("glitch");
-
-    setTimeout(()=>{
-
-        app.style.display =
-            "none";
-
-        finalScreen.style.display =
-            "flex";
-
-    },4500);
-}
-
-</script>
-
-</body>
-</html>
-```
+let percent = 0
